@@ -7,10 +7,10 @@ var passwordLength;
 var lowercase = "abcdefghijklmnopqrstuvwxyz";
 var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var numbers = "0123456789";
-var characters = "!@#\$%^&*()-_=+[]{};:'<>,./?`~|";
+var specialChar = "!@#\$%^&*()-_=+[]{};:'<>,./?`~|";
 var includeUppercase;
-var lowercaseNumber;
-var numberNumber;
+var includeLowercase;
+var includeNumbers;
 var charactersNumber;
 
 //this function determines the length of the password. uses if statement to ensure user enters a number and that number is between 8-128.
@@ -35,37 +35,87 @@ function determineLength(){
   return passwordLength;
 }
 
+function determineLowercase(){
+  includeLowercase = prompt("Do you want to include lowercase letters in your password? \n(Yes or No)");
+  includeLowercase = includeLowercase.toLowerCase();
+
+  if (includeLowercase === "yes" || includeLowercase === "y"){
+    includeLowercase = true;
+    return includeLowercase;
+  }
+  else if (includeLowercase === "no" || includeLowercase === "n"){
+    includeLowercase = false;
+    return includeLowercase;
+}
+  else if (includeLowercase === null || includeLowercase === ""){
+    alert("This field is required.");
+    determineLowercase();
+  }
+  else {
+    alert("This field is required.");
+    determineLowercase();
+  }
+}
+
 function determineUppercase(){
   includeUppercase = prompt("Do you want to include uppercase letters in your password? \n(Yes or No)");
   includeUppercase = includeUppercase.toLowerCase();
 
-  if (includeUppercase === "yes" || includeUppercase === "y"){
+  if (includeUppercase === null || includeUppercase === ""){
+    alert("Please answer Yes or No");
+    determineUppercase();
+
+  }else if (includeUppercase === "yes" || includeUppercase ==="y"){
     includeUppercase = true;
     return includeUppercase;
-  }
-  else if (includeUppercase === "no" || includeUppercase === "n"){
+
+  }else if (includeUppercase === "no" || includeUppercase ==="n"){
     includeUppercase = false;
     return includeUppercase;
+  
+  }else {
+    alert("Please answer Yes or No");
+    determineUppercase();
+  }
+  return includeUppercase;
 }
-  else if (includeUppercase === null || includeUppercase === ""){
-    alert("This field is required.");
-    determineUppercase();
-  }
-  else {
-    alert("This field is required.");
-    determineUppercase();
-  }
+
+//Function used to determine whether the user wants to include numbers in the password
+function determineNumbers(){
+  includeNumbers = prompt("Do you want to include numbers in your password? \n(Yes or No)");
+    includeNumbers = includeNumbers.toLowerCase();
+
+    if (includeNumbers === null || includeNumbers === ""){
+      alert("This field is required.");
+      determineNumbers();
+
+    }else if (includeNumbers === "yes" || includeNumbers ==="y"){
+      includeNumbers = true;
+      return includeNumbers;
+
+    }else if (includeNumbers === "no" || includeNumbers ==="n"){
+      includeNumbers = false;
+      return includeNumbers;
+    
+    }else {
+      alert("This field is required.");
+      determineNumbers();
+    }
+    return includeNumbers;
 }
 
 function generatePassword(){
   determineLength();
   determineUppercase();
+  determineNumbers();
 
-  var characters = lowercase;
+  characters = lowercase
   var password = "";
-
+  if (includeLowercase && includeUppercase && includeNumbers){
+    lowercase + uppercase + numbers;
+  }
   if (includeUppercase){
-    characters += uppercase;
+    includeUppercase;
   }
 
   else{
@@ -73,7 +123,7 @@ function generatePassword(){
   }
 
   for(var i = 0; i < passwordLength; i++){
-    password += characters.charAt(Math.random() * characters.length);
+    password += lowercase.charAt(Math.floor(Math.random() * lowercase.length));
   }
 
   return password;
