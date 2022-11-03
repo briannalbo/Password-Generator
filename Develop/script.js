@@ -8,8 +8,8 @@ var lowercase = "abcdefghijklmnopqrstuvwxyz";
 var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var numbers = "0123456789";
 var specialChar = "!@#\$%^&*()-_=+[]{};:'<>,./?`~|";
+var haveLowercase;
 var includeUppercase;
-var includeLowercase;
 var includeNumbers;
 var charactersNumber;
 
@@ -30,52 +30,52 @@ function determineLength(){
     determineLength();
   }
   else{
-    alert("Answer prompts to determine which characters will be included in your password.");
-  }
   return passwordLength;
+  }
+  return passwordLength
 }
 
 function determineLowercase(){
-  includeLowercase = prompt("Do you want to include lowercase letters in your password? \n(Yes or No)");
-  includeLowercase = includeLowercase.toLowerCase();
+  haveLowercase = prompt("Do you want to include lowercase letters in your password? \n(Yes or No)");
+  haveLowercase = haveLowercase.toLowerCase();
 
-  if (includeLowercase === "yes" || includeLowercase === "y"){
-    includeLowercase = true;
-    return includeLowercase;
-  }
-  else if (includeLowercase === "no" || includeLowercase === "n"){
-    includeLowercase = false;
-    return includeLowercase;
-}
-  else if (includeLowercase === null || includeLowercase === ""){
-    alert("This field is required.");
+  if (haveLowercase === null || haveLowercase === ""){
+    alert("this required.");
     determineLowercase();
+  }
+  else if (haveLowercase === "yes" || haveLowercase === "y"){
+    haveLowercase = true;
+    return haveLowercase;
+  }
+  else if (haveLowercase === "no" || haveLowercase === "n"){
+    haveLowercase = false;
+    return haveLowercase;
   }
   else {
     alert("This field is required.");
-    determineLowercase();
+    return haveLowercase;
   }
+  return haveLowercase;
 }
 
 function determineUppercase(){
   includeUppercase = prompt("Do you want to include uppercase letters in your password? \n(Yes or No)");
-  includeUppercase = includeUppercase.toLowerCase();
+  includeUppercase = lowercase.toUpperCase();
 
   if (includeUppercase === null || includeUppercase === ""){
-    alert("Please answer Yes or No");
+    alert("This field is required.");
     determineUppercase();
-
-  }else if (includeUppercase === "yes" || includeUppercase ==="y"){
+  }
+  else if (includeUppercase === "yes" || includeUppercase === "y"){
     includeUppercase = true;
     return includeUppercase;
-
-  }else if (includeUppercase === "no" || includeUppercase ==="n"){
+  }
+  else if (includeUppercase === "no" || includeUppercase ==="n"){
     includeUppercase = false;
     return includeUppercase;
-  
-  }else {
-    alert("Please answer Yes or No");
-    determineUppercase();
+  }
+  else {
+    return includeUppercase;
   }
   return includeUppercase;
 }
@@ -88,16 +88,16 @@ function determineNumbers(){
     if (includeNumbers === null || includeNumbers === ""){
       alert("This field is required.");
       determineNumbers();
-
-    }else if (includeNumbers === "yes" || includeNumbers ==="y"){
+    }
+    else if (includeNumbers === "yes" || includeNumbers ==="y"){
       includeNumbers = true;
       return includeNumbers;
-
-    }else if (includeNumbers === "no" || includeNumbers ==="n"){
+    }
+    else if (includeNumbers === "no" || includeNumbers ==="n"){
       includeNumbers = false;
       return includeNumbers;
-    
-    }else {
+    }
+    else {
       alert("This field is required.");
       determineNumbers();
     }
@@ -106,24 +106,33 @@ function determineNumbers(){
 
 function generatePassword(){
   determineLength();
+  console.log(passwordLength);
   determineUppercase();
+  console.log(includeUppercase);
   determineNumbers();
+  console.log(includeNumbers);
 
-  characters = lowercase
+  var characters;
   var password = "";
-  if (includeLowercase && includeUppercase && includeNumbers){
-    lowercase + uppercase + numbers;
+  if (haveLowercase && includeUppercase && includeNumbers){
+    characters = lowercase += uppercase += numbers;
   }
-  if (includeUppercase){
-    includeUppercase;
+  else if (includeUppercase && includeNumbers){
+    characters = uppercase += numbers;
+  }
+  else if (includeUppercase){
+    characters = uppercase;
+  }
+  else if (haveLowercase){
+    characters = lowercase;
   }
 
-  else{
-    characters === lowercase;
+  else {
+     alert("error");
   }
 
   for(var i = 0; i < passwordLength; i++){
-    password += lowercase.charAt(Math.floor(Math.random() * lowercase.length));
+    password += characters.charAt(Math.floor(Math.random() * characters.length));
   }
 
   return password;
