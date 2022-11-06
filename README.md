@@ -20,3 +20,14 @@ WHEN all prompts are answered
 THEN a password is generated that matches the selected criteria
 WHEN the password is generated
 THEN the password is either displayed in an alert or written to the page
+
+## Challenge Work Done
+This challenge involved using Javascript to create a password generator that users can 
+interact with. I created functions that recorded the users preferences in which types of
+characters they would like to include in their randomly generated passwords. They could
+choose from a combination of lowercase letters, uppercase letters, numbers, and special
+characters. Another function was used to randomly generate the users password based on 
+the preferences they entered. User password is then generated and displayed on page.
+
+
+![passgen.png](https://github.com/briannalbo/Password-Generator/blob/main/passgen.png)
