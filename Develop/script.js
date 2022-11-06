@@ -152,20 +152,20 @@ function generatePassword(){
   else if (haveLowercase && includeUppercase && includeNumbers){
     characters = lowercase + uppercase + numbers;
   }
+  else if (haveLowercase && includeNumbers && haveSpecial){
+    characters = lowercase + numbers + specialChar;
+  }
+  else if (haveLowercase && includeUppercase && haveSpecial){
+    characters = lowercase + uppercase + specialChar;
+  }
+  else if (includeUppercase && includeNumbers && haveSpecial){
+    characters = uppercase + numbers + specialChar;
+  }
   else if (haveLowercase && includeNumbers){
     characters = lowercase + numbers;
   }
   else if (haveLowercase && haveSpecial){
   characters = lowercase + specialChar;
-  }
-  else if (haveLowercase && includeUppercase && haveSpecial){
-    characters = lowercase + uppercase + specialChar;
-  }
-  else if (haveLowercase && includeNumbers && haveSpecial){
-    characters = lowercase + numbers + specialChar;
-  }
-  else if (includeUppercase && includeNumbers && haveSpecial){
-    characters = uppercase + numbers + specialChar;
   }
   else if (includeUppercase && haveSpecial){
     characters = uppercase + specialChar;
@@ -213,5 +213,5 @@ function writePassword() {
 
 }
 
-// Add event listener to generate button
+// Adds event listener to generate button
 generateBtn.addEventListener("click", writePassword);
